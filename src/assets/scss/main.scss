@@ -1,0 +1,80 @@
+@import "variables";
+@import "../fonts/proxima-nova/stylesheet.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul, li {
+  list-style-type: none;
+}
+
+html {
+  font-size: 16px;
+  font-family: 'Proxima Nova Rg', sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.col {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.flex {
+  flex: 1;
+  &-box {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.btn-clean {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.h1 {
+  font-weight: bold;
+  font-size: 32px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.flash-message {
+  padding: 30px;
+}
+
+.mt-54 {
+  margin-top: 54px;
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.position-relative {
+  position: relative;
+}
