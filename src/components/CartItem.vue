@@ -34,7 +34,7 @@ import { useStore } from 'vuex';
 export default defineComponent({
   props: {
     item: {
-      type: Object,
+      type: Object as PropType<Pizza>,
       required: true,
     },
     index: {
@@ -45,11 +45,11 @@ export default defineComponent({
 
   setup(props) {
     const store = useStore();
-    const { item } = toRefs(props);
+    const item = props.item as Pizza;
     const amount = computed<number>(() => {
       const {
         qty, price, size, dough,
-      } = item.value;
+      } = item;
       return qty * price * size.multiplier * dough.multiplier;
     });
 

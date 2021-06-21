@@ -61,8 +61,10 @@ export default defineComponent({
         qty: 1,
       });
     }
+
+    const item = props.item as Pizza;
     const totalPrice = computed(() => {
-      return (props.item.price * state.dough.multiplier * state.size.multiplier).toFixed(2);
+      return (item.price * state.dough.multiplier * state.size.multiplier).toFixed(2);
     });
 
     const selectedItem = computed(() => {
