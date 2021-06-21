@@ -1,5 +1,4 @@
 <template>
- <Suspense>
      <div>
        <div class="d-flex align-center justify-between">
          <!--    <PizzaFilter @on-filter="handleFilter" />-->
@@ -20,7 +19,6 @@
          />
        </div>
      </div>
- </Suspense>
 
 </template>
 
@@ -77,3 +75,16 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped lang="scss">
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+}
+
+.placeholder {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+</style>

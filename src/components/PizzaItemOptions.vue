@@ -6,7 +6,7 @@
         :key="dOpt.title"
         @click="selectDough(dOpt)"
         class="btn-clean col"
-        :class="{selected: (dOptSelected === dOpt)}"
+        :class="{selected: (state.dOptSelected.title === dOpt.title)}"
         data-test="dough-btn"
       >{{ dOpt.title }}
       </button>
@@ -17,7 +17,7 @@
         :key="sOpt.title"
         @click="selectSize(sOpt)"
         class="btn-clean col"
-        :class="{selected: (sOptSelected === sOpt)}"
+        :class="{selected: (state.sOptSelected.title === sOpt.title)}"
         data-test="size-btn"
       >{{ sOpt.title }} см.
       </button>
@@ -26,28 +26,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { PizzaOption } from '@/types';
 import { SIZE_OPTIONS, DOUGH_OPTIONS } from '@/constants';
 
 export default defineComponent({
-  // doughOptions = DOUGH_OPTIONS;
-  //
-  // dOptSelected = this.doughOptions[0];
-  //
-  // sizeOptions = SIZE_OPTIONS;
-  //
-  // sOptSelected = this.sizeOptions[0];
-  //
-  // @Emit('dough-selected')
-  // selectDough(val: PizzaOption): void {
-  //   this.dOptSelected = val;
-  // }
-  //
-  // @Emit('size-selected')
-  // selectSize(val: PizzaOption): void {
-  //   this.sOptSelected = val;
-  // }
+  emits: ['dough-selected', 'size-selected'],
+  setup(props, { emit }) {
+    const state = reactive({
+      dOptSelected: DOUGH_OPTIONS[0],
+      sOptSelected: SIZE_OPTIONS[0],
+    });
+
+    function selectDough(val: PizzaOption): void {
+      state.dOptSelected = val;
+      emit('dough-selected', val);
+    }
+
+    function selectSize(val: PizzaOption): void {
+      state.sOptSelected = val;
+      emit('size-selected', val);
+    }
+
+    return {
+      state,
+      doughOptions: DOUGH_OPTIONS,
+      sizeOptions: SIZE_OPTIONS,
+      selectDough,
+      selectSize,
+    };
+  },
 });
 </script>
 

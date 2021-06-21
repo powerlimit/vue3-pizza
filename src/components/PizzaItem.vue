@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import {
-  defineComponent, computed, PropType, ref, toRef, reactive,
+  defineComponent, computed, reactive,
 } from 'vue';
 import { useStore } from 'vuex';
 import { Pizza, PizzaOption } from '@/types';
@@ -29,7 +29,7 @@ import { DOUGH_OPTIONS, SIZE_OPTIONS } from '@/constants';
 export default defineComponent({
   props: {
     item: {
-      type: Object as PropType<Pizza>,
+      type: Object,
       required: true,
     },
   },
@@ -45,8 +45,6 @@ export default defineComponent({
       size: SIZE_OPTIONS[0] as PizzaOption,
     });
 
-    const item = toRef(props, 'item');
-
     function handleDoughSelect(val: PizzaOption): void {
       state.dough = val;
     }
@@ -57,19 +55,18 @@ export default defineComponent({
 
     function handleAddToCart(): void {
       store.commit('ADD_TO_CART', {
-        // ...item,
+        ...props.item,
         size: state.size,
         dough: state.dough,
         qty: 1,
       });
     }
-    console.log(props.item);
     const totalPrice = computed(() => {
-      return 1; // (props.item.price * state.dough.multiplier * state.value.multiplier).toFixed(2);
+      return (props.item.price * state.dough.multiplier * state.size.multiplier).toFixed(2);
     });
 
     const selectedItem = computed(() => {
-      return 1;// store.getters.getSelectedPizzaById(props.item.id);
+      return store.getters.getSelectedPizzaById(props.item.id);
     });
 
     return {

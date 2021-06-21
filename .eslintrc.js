@@ -19,7 +19,8 @@ module.exports = {
     {
       files: ['*.vue'],
       rules: {
-        'arrow-body-style': 'off'
+        'arrow-body-style': 'off',
+        '@typescript-eslint/no-unused-vars': 'off'
       }
     },
     {
