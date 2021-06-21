@@ -24,45 +24,59 @@
 </template>
 
 <script lang="ts">
+import {
+  defineComponent, computed, toRefs, PropType,
+} from 'vue';
 import { Pizza } from '@/types';
-import { PropType } from 'vue';
 
-@Component({})
-export default class CartItem extends Vue {
-  @Prop({
-    type: Object as PropType<Pizza>,
-    required: true,
-  })
-  readonly item: Pizza
+import { useStore } from 'vuex';
 
-  @Prop({
-    type: Number,
-    required: true,
-  })
-  readonly index: number
+export default defineComponent({
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+    index: {
+      type: Number,
+      required: true,
+    },
+  },
 
-  get amount(): number {
-    const {
-      qty, price, size, dough,
-    } = this.item;
-    return qty * price * size.multiplier * dough.multiplier;
-  }
+  setup(props) {
+    const store = useStore();
+    const { item } = toRefs(props);
+    const amount = computed<number>(() => {
+      const {
+        qty, price, size, dough,
+      } = item.value;
+      return qty * price * size.multiplier * dough.multiplier;
+    });
 
-  addQty(): void {
-    this.$store.commit('INCREASE_QTY', this.index);
-  }
-
-  subtractQty(): void {
-    this.$store.commit('SUBTRACT_QTY', this.index);
-  }
-
-  handleRemoveFromCart(): void {
-    const confirmed = confirm('Вы действительно хотите удалить пиццу с заказа');
-    if (confirmed) {
-      this.$store.commit('REMOVE_ITEM', this.index);
+    function addQty(): void {
+      store.commit('INCREASE_QTY', props.index);
     }
-  }
-}
+
+    function subtractQty(): void {
+      store.commit('SUBTRACT_QTY', props.index);
+    }
+
+    function handleRemoveFromCart(): void {
+      // eslint-disable-next-line no-restricted-globals,no-alert
+      const confirmed = confirm('Вы действительно хотите удалить пиццу с заказа');
+      if (confirmed) {
+        store.commit('REMOVE_ITEM', props.index);
+      }
+    }
+
+    return {
+      amount,
+      addQty,
+      subtractQty,
+    };
+  },
+
+});
 </script>
 
 <style scoped lang="scss">

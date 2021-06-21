@@ -1,16 +1,16 @@
 <template>
-  <div class="position-relative">
+  <div class="position-relative" v-click-away="hideMenu">
     <button
-      @click="isMenuShown = !isMenuShown"
+      @click="state.isMenuShown = true"
       class="btn-clean btn-select"
     >
-      {{ selectedOption.label }}
+      {{ state.selectedOption.label }}
     </button>
-    <ul class="filter-list" :class="{showed: isMenuShown}">
+    <ul class="filter-list" :class="{showed: state.isMenuShown}">
       <li v-for="option in filterOptions" :key="option.label">
         <button
           data-test="pizza-filter"
-          :class="{selected: (selectedOption.value === option.value)}"
+          :class="{selected: (state.selectedOption.value === option.value)}"
           class="btn-filter"
           @click="setFilter(option)"
         >{{ option.label }}
@@ -21,30 +21,37 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { FILTER_OPTIONS } from '@/constants';
 import { FilterOption } from '@/types';
 
 export default defineComponent({
 
-  setup() {
-    const selectedOption = ref<FilterOption>(FILTER_OPTIONS[0])
-    const isMenuShown = ref<boolean>(false)
+  setup(props, { emit }) {
+    const state = reactive({
+      selectedOption: FILTER_OPTIONS[0],
+      isMenuShown: false,
+    });
+
+    function hideMenu():void {
+      state.isMenuShown = false;
+    }
+
+    function setFilter(val: FilterOption): void {
+      state.selectedOption = val;
+      emit('on-filter', val);
+      hideMenu();
+    }
+
     return {
       filterOptions: FILTER_OPTIONS,
-    }
-  }
+      state,
+      setFilter,
+      hideMenu,
+    };
+  },
 
-  @Emit('on-filter')
-  setFilter(val: FilterOption): void {
-    this.selectedOption = val;
-    this.hideMenu();
-  }
-
-  hideMenu():void {
-    this.isMenuShown = false;
-  }
-})
+});
 </script>
 
 <style scoped lang="scss">

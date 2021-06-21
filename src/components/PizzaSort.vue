@@ -1,14 +1,18 @@
 <template>
-  <div class="sort" data-test="open-modal" @click="opened = !opened">
+  <div
+    v-click-away="closeMenu"
+    class="sort"
+    data-test="open-modal"
+    @click="state.opened = true">
     <strong>
       <img
-        :class="{rotated: !opened}"
+        :class="{rotated: !state.opened}"
         src="../assets/images/caret.svg"
         alt="">
       Сортировка по:
     </strong>
-    <span class="selected">{{ selectedOption.label }}</span>
-    <ul v-click-outside="closeModal" class="sort-options" v-if="opened">
+    <span class="selected">{{ state.selectedOption.label }}</span>
+    <ul class="sort-options" v-if="state.opened">
       <li
         v-for="option in sortOptions"
         :key="option.label"
@@ -25,25 +29,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import { SORT_OPTIONS } from '@/constants';
 import { FilterOption } from '@/types';
 
 export default defineComponent({
-  // sortOptions = SORT_OPTIONS;
-  //
-  // selectedOption = SORT_OPTIONS[0];
-  //
-  // opened = false;
-  //
-  // closeModal(): void {
-  //   this.opened = false;
-  // }
-  //
-  // @Emit('on-sort')
-  // setSort(val: FilterOption): void {
-  //   this.selectedOption = val;
-  // }
+  setup(props, { emit }) {
+    const state = reactive({
+      selectedOption: SORT_OPTIONS[0],
+      opened: false,
+    });
+
+    function closeMenu() {
+      state.opened = false;
+    }
+
+    function setSort(val: FilterOption): void {
+      state.selectedOption = val;
+      emit('on-sort', val);
+      closeMenu();
+    }
+
+    return {
+      state,
+      setSort,
+      closeMenu,
+      sortOptions: SORT_OPTIONS,
+    };
+  },
 });
 </script>
 

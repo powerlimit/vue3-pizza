@@ -15,13 +15,17 @@ export interface Pizza {
   dough?: PizzaOption;
 }
 
-export interface PizzaSortFields {
-  title: string;
-  price: string;
-  frequency: string;
-}
+export type PizzaSortField = 'title' | 'price' | 'frequency';
+export type PizzaFilterField = '' | 'meet' | 'vegan' | 'grill' | 'hot' | 'closed';
 
 export interface FilterOption {
   label: string;
   value: string;
+}
+
+export interface HomeState {
+  loading: boolean;
+  items: Pizza[];
+  sortOption: FilterOption;
+  filterOption: FilterOption;
 }

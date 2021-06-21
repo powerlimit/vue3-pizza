@@ -7,10 +7,10 @@
         <span>самая вкусная пицца во&nbsp;вселенной</span>
       </div>
     </router-link>
-<!--    <router-link :to="{name: 'Cart'}" class="btn-cart">
+    <router-link :to="{name: 'Cart'}" class="btn-cart">
       <span class="total">{{total.price}} ₽</span>
       <span><img src="../assets/images/shopping-cart.svg" alt=""> {{total.qty}}</span>
-    </router-link>-->
+    </router-link>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ import { TotalAmount } from '@/store/cart/types';
 export default defineComponent({
   setup() {
     const store = useStore();
-    const total = computed(() => store.getters.getTotal);
+    const total = computed<TotalAmount>(() => store.getters.getTotal);
 
     return {
       total,

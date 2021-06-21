@@ -20,7 +20,9 @@ export const mutations: MutationTree<CartState> = {
 
   SUBTRACT_QTY(state, index: number) {
     const current = state.selected[index];
-    current.qty--;
+    if (current.qty > 2) {
+      current.qty--;
+    }
   },
 
   REMOVE_ITEM(state, index: number) {
