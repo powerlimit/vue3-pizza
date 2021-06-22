@@ -25,11 +25,11 @@
 
 <script lang="ts">
 import {
-  defineComponent, computed, toRefs, PropType,
+  defineComponent, computed, PropType, toRefs,
 } from 'vue';
-import { Pizza } from '@/types';
 
 import { useStore } from 'vuex';
+import Pizza from '@/types/Pizza';
 
 export default defineComponent({
   props: {
@@ -45,11 +45,10 @@ export default defineComponent({
 
   setup(props) {
     const store = useStore();
-    const item = props.item as Pizza;
     const amount = computed<number>(() => {
       const {
         qty, price, size, dough,
-      } = item;
+      } = props.item as Pizza;
       return qty * price * size.multiplier * dough.multiplier;
     });
 
@@ -73,6 +72,7 @@ export default defineComponent({
       amount,
       addQty,
       subtractQty,
+      handleRemoveFromCart,
     };
   },
 

@@ -1,4 +1,4 @@
-import { Pizza } from '@/types';
+import Pizza from '@/types/Pizza';
 
 export interface CartState {
   selected: Pizza[];

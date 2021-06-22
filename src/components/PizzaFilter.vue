@@ -23,7 +23,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 import { FILTER_OPTIONS } from '@/constants';
-import { FilterOption } from '@/types';
+import FilterOption from '@/types/FilterOption';
 
 export default defineComponent({
 

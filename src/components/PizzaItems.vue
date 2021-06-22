@@ -16,16 +16,15 @@ import {
   defineComponent, PropType, computed,
 } from 'vue';
 import PizzaItem from '@/components/PizzaItem.vue';
-import { Pizza, PizzaFilterField, PizzaSortField } from '@/types';
-import { cloneDeep } from 'lodash';
+import Pizza from '@/types/Pizza';
+import PizzaSortField from '@/types/PizzaSortField';
+import PizzaFilterField from '@/types/PizzaFilterField';
 
 export default defineComponent({
-  name: 'PizzaItems',
-  components: { PizzaItem },
   props: {
     items: {
-      required: true,
       type: Array as PropType<Pizza[]>,
+      required: true,
     },
     order: {
       type: String as PropType<PizzaSortField>,
@@ -34,9 +33,12 @@ export default defineComponent({
       type: String as PropType<PizzaFilterField>,
     },
   },
+  name: 'PizzaItems',
+  components: { PizzaItem },
   setup(props) {
     const filtered = computed(() => {
-      let data = JSON.parse(JSON.stringify(props.items));
+      const items = props.items as Pizza[];
+      let data = [...items];
 
       if (props.filter) {
         data = data.filter((i: Pizza) => i.type === props.filter);
@@ -62,5 +64,10 @@ export default defineComponent({
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+}
+.placeholder {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 700;
 }
 </style>

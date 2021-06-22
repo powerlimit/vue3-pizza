@@ -47,10 +47,10 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { createToast } from 'mosha-vue-toastify';
-import { Pizza } from '@/types';
 import CartItem from '@/components/CartItem.vue';
 import { CartState, TotalAmount } from '@/store/cart/types';
 import { useStore } from 'vuex';
+import Pizza from '@/types/Pizza';
 
 export default defineComponent({
   components: { CartItem },

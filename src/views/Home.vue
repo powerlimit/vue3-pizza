@@ -23,11 +23,12 @@ import {
 } from 'vue';
 import { useRouter } from 'vue-router';
 import { FILTER_OPTIONS, SORT_OPTIONS } from '@/constants';
-import { FilterOption, HomeState, Pizza } from '@/types';
 import ApiService from '@/serveces/ApiService';
 import PizzaFilter from '@/components/PizzaFilter.vue';
 import PizzaSort from '@/components/PizzaSort.vue';
 import PizzaItems from '@/components/PizzaItems.vue';
+import Pizza from '@/types/Pizza';
+import FilterOption from '@/types/FilterOption';
 
 export default defineComponent({
   name: 'Home',
@@ -71,10 +72,3 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped lang="scss">
-.placeholder {
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: 700;
-}
-</style>

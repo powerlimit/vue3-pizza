@@ -1,6 +1,6 @@
 import { MutationTree } from 'vuex';
 import { CartState } from '@/store/cart/types';
-import { Pizza } from '@/types';
+import Pizza from '@/types/Pizza';
 
 export const mutations: MutationTree<CartState> = {
   ADD_TO_CART(state, payload: Pizza) {

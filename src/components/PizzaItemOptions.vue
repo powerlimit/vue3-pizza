@@ -27,8 +27,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
-import { PizzaOption } from '@/types';
 import { SIZE_OPTIONS, DOUGH_OPTIONS } from '@/constants';
+import PizzaOption from '@/types/PizzaOption';
 
 export default defineComponent({
   emits: ['dough-selected', 'size-selected'],
