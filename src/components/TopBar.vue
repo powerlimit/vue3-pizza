@@ -1,13 +1,13 @@
 <template>
   <div class="top-bar d-flex align-center justify-between">
-    <router-link to="/" class="d-flex home-link">
+    <router-link data-test="logo" to="/" class="d-flex home-link">
       <img src="../assets/images/logo.svg" class="logo" alt="">
       <div>
         <strong class="title">VUE PIZZA</strong>
         <span>самая вкусная пицца во&nbsp;вселенной</span>
       </div>
     </router-link>
-    <router-link :to="{name: 'Cart'}" class="btn-cart">
+    <router-link data-test="cart" :to="{name: 'Cart'}" class="btn-cart">
       <span class="total">{{total.price}} ₽</span>
       <span><img src="../assets/images/shopping-cart.svg" alt=""> {{total.qty}}</span>
     </router-link>

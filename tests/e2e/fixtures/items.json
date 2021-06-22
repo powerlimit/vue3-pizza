@@ -1,0 +1,34 @@
+[
+    {
+      "id": 1,
+      "title": "Чизбургер-пицца",
+      "price": 395,
+      "image": "cheese-burger",
+      "type": "meet",
+      "frequency": 25
+    },
+    {
+      "id": 2,
+      "title": "Сырная",
+      "price": 450,
+      "image": "cheese",
+      "type": "grill",
+      "frequency": 20
+    },
+    {
+      "id": 3,
+      "title": "Креветки по-азиатски",
+      "price": 290,
+      "image": "shrimp",
+      "type": "hot",
+      "frequency": 15
+    },
+    {
+      "id": 4,
+      "title": "Сырный цыпленок",
+      "price": 385,
+      "image": "chicken",
+      "type": "meet",
+      "frequency": 10
+    }
+  ]
