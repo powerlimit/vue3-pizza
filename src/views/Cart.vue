@@ -27,7 +27,7 @@
         <router-link to="/" class="btn-back-outlined btn">
           <img src="../assets/images/angle.svg" alt=""> Вернуться назад
         </router-link>
-        <button class="btn btn-clean btn-primary" @click="handleCheckout">Оплатить сейчас</button>
+        <button data-test="pay" class="btn btn-clean btn-primary" @click="handleCheckout">Оплатить сейчас</button>
       </div>
     </div>
     <div v-else class="empty flex-box align-center text-center">

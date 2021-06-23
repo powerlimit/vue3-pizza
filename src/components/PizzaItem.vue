@@ -8,7 +8,7 @@
     />
     <div class="d-flex justify-between align-center">
       <strong>{{totalPrice}} ₽</strong>
-      <button @click="handleAddToCart" class="btn-clean btn-add">
+      <button @click="handleAddToCart" class="btn-clean btn-add" data-test="btn-add">
         + Добавить
         <span class="selected-count" v-if="selectedItem">{{selectedItem.qty}}</span>
       </button>
